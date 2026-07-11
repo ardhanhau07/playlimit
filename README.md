@@ -22,9 +22,9 @@ A Windows desktop application to limit application usage time.
 
 ## Screenshot
 
-![Main](assets/SS1.png)
+![Main](Assets/SS1.png)
 
-![Dialog](assets/SS2.png)
+![Dialog](Assets/SS2.png)
 
 ## Installation
 
