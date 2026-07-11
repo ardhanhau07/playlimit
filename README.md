@@ -24,7 +24,7 @@ A Windows desktop application to limit application usage time.
 
 ![Main](Assets/SS1.png)
 
-![Dialog](Assets/SS2.png)
+![Dialog](Assets/SS3.png)
 
 ## Installation
 
