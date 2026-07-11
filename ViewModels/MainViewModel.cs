@@ -1,19 +1,37 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using PlayLimit.Models;
 using PlayLimit.Services;
+using PlayLimit.Views;
 using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.Input;
+using System.Windows;
+using System.Windows.Threading;
+using PlayLimit.Managers;
 
 namespace PlayLimit.ViewModels;
 
 public partial class MainViewModel : ObservableObject
 {
+
+    private readonly DispatcherTimer _timer = new();
+    private readonly UsageTrackerService _tracker = new();
+    private readonly PlaySessionManager _manager = new();
+
     [ObservableProperty]
     private ObservableCollection<AppRule> rules = new();
 
     public MainViewModel()
     {
         LoadRules();
+        _timer.Interval = TimeSpan.FromSeconds(1);
+        _timer.Tick += Timer_Tick;
+        _timer.Start();
+    }
+
+    private void Timer_Tick(object? sender, EventArgs e)
+    {
+        _manager.Update(Rules);
+        Rules = new ObservableCollection<AppRule>(Rules);
     }
 
     private void LoadRules()
@@ -28,6 +46,18 @@ public partial class MainViewModel : ObservableObject
     [RelayCommand]
     private void AddRule()
     {
-        
+        var dialog = new RuleDialog();
+        if (dialog.ShowDialog() == true)
+        {
+            LoadRules();
+        }
+    }
+
+    [RelayCommand]
+    private void TestProcess()
+    {
+        bool running = ProcessMonitorService.IsRunning("steam");
+
+        MessageBox.Show(running ? "Steam sedang berjalan" : "Steam tidak berjalan");
     }
 }

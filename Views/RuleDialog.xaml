@@ -1,0 +1,97 @@
+<Window x:Class="PlayLimit.Views.RuleDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Tambah Program"
+        Height="350"
+        Width="500"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize">
+
+    <Grid Margin="20">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="110"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Nama -->
+        <TextBlock Grid.Row="0"
+                   Grid.Column="0"
+                   VerticalAlignment="Center"
+                   Text="Nama"/>
+
+        <TextBox Grid.Row="0"
+                 Grid.Column="1"
+                 Margin="5"
+                 Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <!-- EXE -->
+        <TextBlock Grid.Row="1"
+                   Grid.Column="0"
+                   VerticalAlignment="Center"
+                   Text="Executable"/>
+
+        <TextBox
+            Grid.Row="1"
+            Grid.Column="1"
+            Margin="5"
+            IsReadOnly="True"
+            Text="{Binding ExePath}"/>
+
+        <Button
+            Grid.Row="1"
+            Grid.Column="2"
+            Margin="5"
+            Width="80"
+            Content="Browse"
+            Command="{Binding BrowseCommand}"/>
+
+        <!-- Limit -->
+        <TextBlock Grid.Row="2"
+                   Grid.Column="0"
+                   VerticalAlignment="Center"
+                   Text="Limit"/>
+
+        <TextBox
+            Grid.Row="2"
+            Grid.Column="1"
+            Margin="5"
+            Text="{Binding TimeLimit}"/>
+
+        <!-- Aktif -->
+        <CheckBox
+            Grid.Row="3"
+            Grid.Column="1"
+            Margin="5"
+            Content="Aktif"
+            IsChecked="{Binding Enabled}"/>
+
+        <!-- Tombol -->
+        <StackPanel Grid.Row="4"
+                    Grid.ColumnSpan="3"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right">
+
+            <Button Width="90"
+                    Margin="5"
+                    Content="Simpan"
+                    Command="{Binding SaveCommand}"/>
+
+            <Button Width="90"
+                    Margin="5"
+                    Content="Batal"/>
+
+        </StackPanel>
+
+    </Grid>
+
+</Window>

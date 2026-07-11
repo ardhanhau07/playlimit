@@ -31,6 +31,32 @@
                 <DataGridCheckBoxColumn Header="Aktif"
                                         Binding="{Binding Enabled}"/>
 
+                <DataGridTextColumn
+                    Header="Dipakai"
+                    Binding="{Binding UsageText}"/>
+
+                <DataGridTextColumn
+                    Header="Sisa"
+                    Binding="{Binding RemainingMinutes}"/>
+
+                <DataGridTemplateColumn Header="Progress">
+
+                    <DataGridTemplateColumn.CellTemplate>
+
+                        <DataTemplate>
+
+                            <ProgressBar
+                                Height="18"
+                                Minimum="0"
+                                Maximum="1"
+                                Value="{Binding Progress, Mode=OneWay}"/>
+
+                        </DataTemplate>
+
+                    </DataGridTemplateColumn.CellTemplate>
+
+                </DataGridTemplateColumn>
+
             </DataGrid.Columns>
 
         </DataGrid>
@@ -44,6 +70,13 @@
                     Height="35"
                     Content="Tambah"
                     Command="{Binding AddRuleCommand}"/>
+
+            <Button
+                Width="100"
+                Height="35"
+                Margin="5,0,0,0"
+                Content="Test"
+                Command="{Binding TestProcessCommand}"/>
 
         </StackPanel>
 

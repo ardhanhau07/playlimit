@@ -1,6 +1,4 @@
-﻿using System.Configuration;
-using System.Data;
-using System.Windows;
+﻿using System.Windows;
 using PlayLimit.Services;
 
 namespace PlayLimit;
@@ -9,9 +7,29 @@ public partial class App : Application
 {
     protected override void OnStartup(StartupEventArgs e)
     {
-        base.OnStartup(e);
+        try
+        {
+            base.OnStartup(e);
 
-        DatabaseService.Initialize();
+            DatabaseService.Initialize();
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.ToString());
+        }
+    }
+
+    protected override void OnExit(ExitEventArgs e)
+    {
+        base.OnExit(e);
+    }
+
+    public App()
+    {
+        this.DispatcherUnhandledException += (s, e) =>
+        {
+            MessageBox.Show(e.Exception.ToString(), "Unhandled Exception");
+            e.Handled = true;
+        };
     }
 }
-
